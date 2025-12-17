@@ -30,15 +30,30 @@ mtcars %>%
 
 
 #In mtcars, create a new column cyl_group:4 → "Small", 6 → "Medium" and 8 → "Large"
-
-print("great")
+require(tidyverse)
 mtcars %>% 
-  mutate
+  mutate(cyl_group = case_when(cyl == 4 ~ "small",
+                               cyl == 6 ~ "medium",
+                               cyl == 8 ~ "large"))
 
 
+# In iris, recode Species into a new column Type:"setosa" → "A", "versicolor" → "B" and "virginica" → "C"
+view(iris)
+iris %>% 
+  rename(Type = Species) %>% 
+  mutate(Type = recode(Type, 
+                       "setosa" = "A", "virginica" = "C", "versicolor" = "B"))
 
+#From mtcars, select only columns: mpg, hp, wt and show first 6 rows.
+head(mtcars %>% 
+  select(mpg, hp, wt))
 
+#Filter mtcars where mpg > 20 and cyl != 8.
+head(mtcars %>% 
+  filter(mpg > 20, cyl !=8) %>% 
 
+#Arrange the filtered mtcars dataset (from Question 2) in descending order of mpg.
 
+  arrange(-mpg),5)
 
 
